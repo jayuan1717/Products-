@@ -1,24 +1,32 @@
-products = []
+import os # operating system
 
-with open('products.csv', 'r', encoding='utf-8') as f:
-	for line in f:
-		if 'product, price' in line:
-			continue
-		name, price = line.strip().split(',')
-		products.append([name, Price])
-print(products)
+products = []
+if os.path.isfile('products.csv'):
+	print('File is found!')
+	with open('products.csv', 'r', encoding='utf-8') as f:
+		for line in f:
+			if 'product, price' in line:
+				continue
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+else:
+	print('The file is not found..:(')
+
 
 # let user add new product and price
 while True:
-    name = input('Please entre the product title: ')
-    if name == 'q':
-    	break
-    price = input('Please entre the price:')
-    products.append([name, price])
+	name = input('Please entre the product title: ')
+	if name == 'q':
+		break
+	price = input('Please entre the price:')
+	products.append([name, price])
+
 
 # print out the porduct and price 
 for p in products:
 	print(p[0], 'is selling at price of', p[1], 'CAD')
+
 
 	with open('products.csv', 'w', encoding='utf-8') as f:
 		f.write('product, price\n')
